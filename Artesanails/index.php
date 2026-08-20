@@ -1,5 +1,5 @@
 <?php 
-include("config/conexion.php");
+include "config/conexion.php";
 session_start();
 ?>
 <!DOCTYPE html>
@@ -32,7 +32,6 @@ session_start();
             padding: 0 20px;
         }
 
-        /
         .navbar {
             background: #fff;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -116,7 +115,6 @@ session_start();
             background: #9e4f20;
         }
 
-        
         .user-welcome {
             display: flex;
             align-items: center;
@@ -155,7 +153,6 @@ session_start();
             color: #2d2a24;
         }
 
-        
         .hero {
             background: linear-gradient(135deg, #f7efe8 0%, #f0e3d9 100%);
             padding: 60px 0 70px;
@@ -228,7 +225,6 @@ session_start();
             object-fit: cover;
         }
 
-        
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -287,7 +283,6 @@ session_start();
             margin-top: 4px;
         }
 
-       
         .promos {
             background: #fff5ed;
             padding: 50px 0;
@@ -339,7 +334,6 @@ session_start();
             margin-left: 8px;
         }
 
-       
         .testimonios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -377,7 +371,6 @@ session_start();
             color: #7a6c5e;
         }
 
-       
         .contacto {
             background: #f3ede7;
             padding: 50px 0;
@@ -546,6 +539,19 @@ session_start();
             margin-bottom: 20px;
             font-size: 1.5rem;
             color: #2d2a24;
+        }
+
+        /* Clase visual para etiquetas de accesibilidad ocultas o integradas si se desea mantener diseño limpio */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         .modal-form input,
@@ -783,12 +789,16 @@ session_start();
                     <p><i class="fas fa-clock"></i> Dom: 8:00 am – 2:00 pm</p>
                 </div>
 
-                <form class="contacto-form">
-                    <input type="text" placeholder="Tu nombre" required />
-                    <input type="email" placeholder="Correo electrónico" required />
-                    <textarea placeholder="¿Qué productos buscas?"></textarea>
-                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
-                </form>
+              <form class="contacto-form">
+   
+    <label for="cont-nombre" class="sr-only">Tu nombre</label>
+    <input type="text" id="cont-nombre" placeholder="Tu nombre" required />
+    <label for="cont-email" class="sr-only">Correo electrónico</label>
+    <input type="email" id="cont-email" placeholder="Correo electrónico" required />
+    <label for="cont-mensaje" class="sr-only">¿Qué productos buscas?</label>
+    <textarea id="cont-mensaje" placeholder="¿Qué productos buscas?"></textarea>
+    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+</form>
             </div>
         </div>
     </section>
@@ -824,28 +834,34 @@ session_start();
     </footer>
 
 
+    <!-- Modal Iniciar Sesión con labels asociados -->
     <div class="modal-overlay" id="modalLogin">
         <div class="modal-container">
             <button class="modal-close" id="closeLogin"><i class="fas fa-times"></i></button>
             <h3>Iniciar Sesión</h3>
             <form action="Controller/login.php" method="POST" class="modal-form">
-                <input type="email" name="correo" placeholder="Correo electrónico" required />
-                <input type="password" name="password" placeholder="Contraseña" required />
+                <label for="login-correo" class="sr-only">Correo electrónico</label>
+                <input type="email" id="login-correo" name="correo" placeholder="Correo electrónico" required />
+                <label for="login-password" class="sr-only">Contraseña</label>
+                <input type="password" id="login-password" name="password" placeholder="Contraseña" required />
                 <button type="submit" class="btn">Entrar</button>
             </form>
         </div>
     </div>
 
-  
+ 
     <div class="modal-overlay" id="modalRegister">
         <div class="modal-container">
             <button class="modal-close" id="closeRegister"><i class="fas fa-times"></i></button>
             <h3>Crear Cuenta</h3>
             <form action="Controller/registro.php" method="POST" class="modal-form">
-                <input type="text" name="nombre" placeholder="Nombre" required />
-                <input type="text" name="apellido" placeholder="Apellido" required />
+                <label for="reg-nombre" class="sr-only">Nombre</label>
+                <input type="text" id="reg-nombre" name="nombre" placeholder="Nombre" required />               
+                <label for="reg-apellido" class="sr-only">Apellido</label>
+                <input type="text" id="reg-apellido" name="apellido" placeholder="Apellido" required />
                 
-                <select name="tipo_identidad" required>
+                <label for="reg-tipo-id" class="sr-only">Seleccione tipo de identidad</label>
+                <select id="reg-tipo-id" name="tipo_identidad" required>
                     <option value="" disabled selected>Seleccione tipo de identidad</option>
                     <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
                     <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
@@ -853,10 +869,17 @@ session_start();
                     <option value="Pasaporte">Pasaporte</option>
                 </select>
 
-                <input type="text" name="numero_identidad" placeholder="Número de identidad" required />
-                <input type="tel" name="telefono" placeholder="Teléfono" required />
-                <input type="email" name="correo" placeholder="Correo electrónico" required />
-                <input type="password" name="password" placeholder="Contraseña (sin encriptar)" required />
+                <label for="reg-num-id" class="sr-only">Número de identidad</label>
+                <input type="text" id="reg-num-id" name="numero_identidad" placeholder="Número de identidad" required />
+                
+                <label for="reg-telefono" class="sr-only">Teléfono</label>
+                <input type="tel" id="reg-telefono" name="telefono" placeholder="Teléfono" required />
+                
+                <label for="reg-correo" class="sr-only">Correo electrónico</label>
+                <input type="email" id="reg-correo" name="correo" placeholder="Correo electrónico" required />
+                
+                <label for="reg-password" class="sr-only">Contraseña</label>
+                <input type="password" id="reg-password" name="password" placeholder="Contraseña" required />
                 
                 <button type="submit" name="registrar" class="btn">Registrarse</button>
             </form>
